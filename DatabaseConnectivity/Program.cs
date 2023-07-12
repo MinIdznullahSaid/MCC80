@@ -32,14 +32,16 @@ public class Program
                     //Create();
                     break;
                 case "2":
-                    //Show();
+                    Console.Clear();
+                    Departements.Execute();
                     break;
                 case "3":
                     Console.Clear();
                     Jobs.Execute();
                     break;
                 case "4":
-                    //Login();
+                    Console.Clear();
+                    Countries.Execute();
                     break;
                 case "5":
                     Console.Clear();
@@ -50,7 +52,8 @@ public class Program
                     Locations.Execute();
                     break;
                 case "7":
-                    //Login();
+                    Console.Clear();
+                    Histories.Execute();
                     break;
                 case "8":
                     return;

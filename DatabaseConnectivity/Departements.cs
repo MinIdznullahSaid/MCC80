@@ -3,9 +3,12 @@ using System;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
 using System.Data;
+using Microsoft.VisualBasic;
+using System.Security.Cryptography;
+
 
 namespace DatabaseConnectivity;
-public class Countries
+public class Departements
 {
     private static string _connectionString = "Data Source = WISNU-PC;Database = db_hrd;Integrated Security = True;Connect Timeout = 30;";
 
@@ -14,7 +17,7 @@ public class Countries
     {
         while (true)
         {
-            Console.WriteLine("== Countries ==");
+            Console.WriteLine("== Departements ==");
             Console.WriteLine("1. Create");
             Console.WriteLine("2. Update");
             Console.WriteLine("3. Delete");
@@ -29,36 +32,40 @@ public class Countries
                 case "1":
                     Console.Clear();
                     Console.WriteLine("Masukkan Id Data yang ingin ditambahkan:");
-                    string id = Console.ReadLine();
-                    Console.WriteLine("Masukkan nama country yang ingin ditambahkan:");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Masukkan nama departement yang ingin ditambahkan:");
                     string name = Console.ReadLine();
-                    Console.WriteLine("Country Id:");
-                    int regionid = Convert.ToInt32(Console.ReadLine());
-                    InsertCountries(id, name, regionid);
+                    Console.WriteLine("Location Id:");
+                    int locationid = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Manager Id:");
+                    int managerid = Convert.ToInt32(Console.ReadLine());
+                    InsertDepartements(id, name, locationid, managerid);
                     break;
                 case "2":
                     Console.Clear();
                     Console.WriteLine("Masukkan Id Data yang ingin diupdate:");
-                    string idUpdate = Console.ReadLine();
-                    Console.WriteLine("Masukkan update nama country:");
+                    int idUpdate = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Masukkan update nama departement:");
                     string nameUpdate = Console.ReadLine();
-                    Console.WriteLine("Country Id:");
-                    int regionidUpdate = Convert.ToInt32(Console.ReadLine());
-                    UpdateCountries(idUpdate, nameUpdate, regionidUpdate);
+                    Console.WriteLine("Location Id:");
+                    int locationidUpdate = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Manager Id:");
+                    int manageridUpdate = Convert.ToInt32(Console.ReadLine());
+                    UpdateDepartements(idUpdate, nameUpdate, locationidUpdate, manageridUpdate);
                     break;
                 case "3":
                     Console.Clear();
                     Console.WriteLine("Masukkan Id Data yang ingin dihapus:");
                     int idDelete = Convert.ToInt32(Console.ReadLine());
-                    DeleteCountries(idDelete);
+                    DeleteDepartements(idDelete);
                     break;
                 case "4":
                     Console.WriteLine("Masukkan Id Data yang ingin ditampilkan:");
                     int idGet = Convert.ToInt32(Console.ReadLine());
-                    GetByIdCountries(idGet);
+                    GetByIdDepartements(idGet);
                     break;
                 case "5":
-                    GetCountries();
+                    GetDepartements();
                     break;
                 case "6":
                     Console.Clear();
@@ -73,14 +80,14 @@ public class Countries
         }
     }
 
-    // GET ALL COUNTRIES
-    public static void GetCountries()
+    // GET ALL DEPARTEMENTS
+    public static void GetDepartements()
     {
         _connection = new SqlConnection(_connectionString);
 
         SqlCommand sqlCommand = new SqlCommand();
         sqlCommand.Connection = _connection;
-        sqlCommand.CommandText = "SELECT * FROM tbl_countries";
+        sqlCommand.CommandText = "SELECT * FROM tbl_departements";
 
         try
         {
@@ -91,15 +98,15 @@ public class Countries
             {
                 while (reader.Read())
                 {
-                    Console.WriteLine("Id: " + reader.GetString(0));
-                    Console.WriteLine("Name: " + reader.GetString(1));
-                    Console.WriteLine("Region Id: " + reader.GetInt32(2));
-
+                    Console.WriteLine("Id: " + reader.GetInt32(0));
+                    Console.WriteLine("Nama Departement: " + reader.GetString(1));
+                    Console.WriteLine("Location Id: " + reader.GetInt32(2));
+                    Console.WriteLine("Manager Id: " + reader.GetInt32(3));
                 }
             }
             else
             {
-                Console.WriteLine("No Country found.");
+                Console.WriteLine("No Departement found.");
             }
 
             reader.Close();
@@ -111,14 +118,14 @@ public class Countries
         }
     }
 
-    // INSERT COUNTRY
-    public static void InsertCountries(string id, string name, int regionid)
+    // INSERT JOB
+    public static void InsertDepartements(int id, string name, int locationid, int managerid)
     {
         _connection = new SqlConnection(_connectionString);
 
         SqlCommand sqlCommand = new SqlCommand();
         sqlCommand.Connection = _connection;
-        sqlCommand.CommandText = "INSERT INTO tbl_countries (id, name, region_id) VALUES (@id, @name, @regionid)";
+        sqlCommand.CommandText = "INSERT INTO tbl_departements (id, name, location_id, manager_id) VALUES (@id, @name, @locationid, @managerid)";
 
         _connection.Open();
         SqlTransaction transaction = _connection.BeginTransaction();
@@ -128,7 +135,7 @@ public class Countries
         {
             SqlParameter pId = new SqlParameter();
             pId.ParameterName = "@id";
-            pId.SqlDbType = SqlDbType.Char;
+            pId.SqlDbType = SqlDbType.Int;
             pId.Value = id;
             sqlCommand.Parameters.Add(pId);
 
@@ -138,11 +145,17 @@ public class Countries
             pName.Value = name;
             sqlCommand.Parameters.Add(pName);
 
-            SqlParameter pRegionId = new SqlParameter();
-            pRegionId.ParameterName = "@regionid";
-            pRegionId.SqlDbType = SqlDbType.Int;
-            pRegionId.Value = regionid;
-            sqlCommand.Parameters.Add(pRegionId);
+            SqlParameter pLocationId = new SqlParameter();
+            pLocationId.ParameterName = "@locationid";
+            pLocationId.SqlDbType = SqlDbType.Int;
+            pLocationId.Value = locationid;
+            sqlCommand.Parameters.Add(pLocationId);
+
+            SqlParameter pManagerId = new SqlParameter();
+            pManagerId.ParameterName = "@managerid";
+            pManagerId.SqlDbType = SqlDbType.Int;
+            pManagerId.Value = managerid;
+            sqlCommand.Parameters.Add(pManagerId);
 
             int result = sqlCommand.ExecuteNonQuery();
             if (result > 0)
@@ -164,14 +177,14 @@ public class Countries
         }
     }
 
-    // EDIT COUNTRY
-    public static void UpdateCountries(string idUpdate, string nameUpdate, int regionidUpdate)
+    // UPDATE DEPARTEMENT
+    public static void UpdateDepartements(int idUpdate, string nameUpdate, int locationidUpdate, int manageridUpdate)
     {
         _connection = new SqlConnection(_connectionString);
 
         SqlCommand sqlCommand = new SqlCommand();
         sqlCommand.Connection = _connection;
-        sqlCommand.CommandText = "UPDATE tbl_countries SET name = (@nameUpdate), region_id = (@regionidUpdate) WHERE id = (@idUpdate)";
+        sqlCommand.CommandText = "UPDATE tbl_departements SET name = (@nameUpdate), location_id = (@locationidUpdate), manager_id = (@manageridUpdate) WHERE id = (@idUpdate)";
 
         _connection.Open();
         SqlTransaction transaction = _connection.BeginTransaction();
@@ -179,23 +192,29 @@ public class Countries
 
         try
         {
+            SqlParameter pTitleUpdate = new SqlParameter();
+            pTitleUpdate.ParameterName = "@nameUpdate";
+            pTitleUpdate.SqlDbType = SqlDbType.VarChar;
+            pTitleUpdate.Value = nameUpdate;
+            sqlCommand.Parameters.Add(pTitleUpdate);
+
             SqlParameter pIdUpdate = new SqlParameter();
             pIdUpdate.ParameterName = "@idUpdate";
-            pIdUpdate.SqlDbType = SqlDbType.Char;
+            pIdUpdate.SqlDbType = SqlDbType.Int;
             pIdUpdate.Value = idUpdate;
             sqlCommand.Parameters.Add(pIdUpdate);
 
-            SqlParameter pNameUpdate = new SqlParameter();
-            pNameUpdate.ParameterName = "@nameUpdate";
-            pNameUpdate.SqlDbType = SqlDbType.VarChar;
-            pNameUpdate.Value = nameUpdate;
-            sqlCommand.Parameters.Add(pNameUpdate);
+            SqlParameter pLocationIdUpdate = new SqlParameter();
+            pLocationIdUpdate.ParameterName = "@locationidUpdate";
+            pLocationIdUpdate.SqlDbType = SqlDbType.Int;
+            pLocationIdUpdate.Value = locationidUpdate;
+            sqlCommand.Parameters.Add(pLocationIdUpdate);
 
-            SqlParameter pRegionIdUpdate = new SqlParameter();
-            pRegionIdUpdate.ParameterName = "@regionidUpdate";
-            pRegionIdUpdate.SqlDbType = SqlDbType.Int;
-            pRegionIdUpdate.Value = regionidUpdate;
-            sqlCommand.Parameters.Add(pRegionIdUpdate);
+            SqlParameter pManagerIdUpdate = new SqlParameter();
+            pManagerIdUpdate.ParameterName = "@manageridUpdate";
+            pManagerIdUpdate.SqlDbType = SqlDbType.Int;
+            pManagerIdUpdate.Value = manageridUpdate;
+            sqlCommand.Parameters.Add(pManagerIdUpdate);
 
             int result = sqlCommand.ExecuteNonQuery();
             if (result > 0)
@@ -217,14 +236,14 @@ public class Countries
         }
     }
 
-    // DELETE COUNTRIES
-    public static void DeleteCountries(int id)
+    // DELETE DEPARTEMENT
+    public static void DeleteDepartements(int idDelete)
     {
         _connection = new SqlConnection(_connectionString);
 
         SqlCommand sqlCommand = new SqlCommand();
         sqlCommand.Connection = _connection;
-        sqlCommand.CommandText = "DELETE FROM tbl_countries WHERE id = (@id)";
+        sqlCommand.CommandText = "DELETE FROM tbl_departements WHERE id = (@idDelete)";
 
         _connection.Open();
         SqlTransaction transaction = _connection.BeginTransaction();
@@ -232,11 +251,11 @@ public class Countries
 
         try
         {
-            SqlParameter pId = new SqlParameter();
-            pId.ParameterName = "@id";
-            pId.SqlDbType = SqlDbType.Int;
-            pId.Value = id;
-            sqlCommand.Parameters.Add(pId);
+            SqlParameter pIdDelete = new SqlParameter();
+            pIdDelete.ParameterName = "@idDelete";
+            pIdDelete.SqlDbType = SqlDbType.Int;
+            pIdDelete.Value = idDelete;
+            sqlCommand.Parameters.Add(pIdDelete);
 
             int result = sqlCommand.ExecuteNonQuery();
             if (result > 0)
@@ -259,13 +278,13 @@ public class Countries
     }
 
     // GET BY ID
-    public static void GetByIdCountries(int id)
+    public static void GetByIdDepartements(int id)
     {
         _connection = new SqlConnection(_connectionString);
 
         SqlCommand sqlCommand = new SqlCommand();
         sqlCommand.Connection = _connection;
-        sqlCommand.CommandText = "SELECT * FROM tbl_countries WHERE id = (@id)";
+        sqlCommand.CommandText = "SELECT * FROM tbl_departements WHERE id = (@id)";
 
         try
         {
@@ -282,14 +301,15 @@ public class Countries
             {
                 while (reader.Read())
                 {
-                    Console.WriteLine("Id: " + reader.GetString(0));
-                    Console.WriteLine("Name: " + reader.GetString(1));
-                    Console.WriteLine("Region Id: " + reader.GetInt32(2));
+                    Console.WriteLine("Id: " + reader.GetInt32(0));
+                    Console.WriteLine("Nama Departement: " + reader.GetString(1));
+                    Console.WriteLine("Location Id: " + reader.GetInt32(2));
+                    Console.WriteLine("Manager Id: " + reader.GetInt32(3));
                 }
             }
             else
             {
-                Console.WriteLine("No Countries found.");
+                Console.WriteLine("No Departement found.");
             }
 
             reader.Close();
