@@ -43,7 +43,7 @@ public class Program
                         Console.Clear();
                         DepartementMenu();
                         break;
-                    case 3:
+ */                    case 3:
                         Console.Clear();
                         JobMenu();
                         break;
@@ -51,7 +51,7 @@ public class Program
                         Console.Clear();
                         CountryMenu();
                         break;
-*/                    case 5:
+                    case 5:
                         Console.Clear();
                         RegionMenu();
                         break;
@@ -100,7 +100,7 @@ public class Program
                     cRegion.Update();
                     PressAnyKey();
                     break;
-/*                case 3:
+                case 3:
                     Console.Clear();
                     cRegion.Delete();
                     PressAnyKey();
@@ -109,7 +109,7 @@ public class Program
                     cRegion.GetById();
                     PressAnyKey();
                     break;
-*/                case 5:
+                case 5:
                     cRegion.GetAll();
                     PressAnyKey();
                     break;
@@ -123,7 +123,7 @@ public class Program
         } while (isTrue);
     }
 
- /*   private static void CountryMenu()
+    private static void CountryMenu()
     {
         Country country = new Country();
         VCountry vCountry = new VCountry();
@@ -168,231 +168,231 @@ public class Program
         } while (isTrue);
     }
 
-    private static void LocationMenu()
-    {
-        Location location = new Location();
-        VLocation vLocation = new VLocation();
-        CLocation cLocation = new CLocation(location, vLocation);
+    /*   private static void LocationMenu()
+       {
+           Location location = new Location();
+           VLocation vLocation = new VLocation();
+           CLocation cLocation = new CLocation(location, vLocation);
 
-        bool isTrue = true;
-        do
-        {
-            int pilihMenu = vLocation.Menu();
-            switch (pilihMenu)
-            {
-                case 1:
-                    Console.Clear();
-                    cLocation.Insert();
-                    PressAnyKey();
-                    break;
-                case 2:
-                    Console.Clear();
-                    cLocation.Update();
-                    PressAnyKey();
-                    break;
-                case 3:
-                    Console.Clear();
-                    cLocation.Delete();
-                    PressAnyKey();
-                    break;
-                case 4:
-                    cLocation.GetById();
-                    PressAnyKey();
-                    break;
-                case 5:
-                    cLocation.GetAll();
-                    PressAnyKey();
-                    break;
-                case 6:
-                    isTrue = false;
-                    break;
-                default:
-                    InvalidInput();
-                    break;
-            }
-        } while (isTrue);
-    }
+           bool isTrue = true;
+           do
+           {
+               int pilihMenu = vLocation.Menu();
+               switch (pilihMenu)
+               {
+                   case 1:
+                       Console.Clear();
+                       cLocation.Insert();
+                       PressAnyKey();
+                       break;
+                   case 2:
+                       Console.Clear();
+                       cLocation.Update();
+                       PressAnyKey();
+                       break;
+                   case 3:
+                       Console.Clear();
+                       cLocation.Delete();
+                       PressAnyKey();
+                       break;
+                   case 4:
+                       cLocation.GetById();
+                       PressAnyKey();
+                       break;
+                   case 5:
+                       cLocation.GetAll();
+                       PressAnyKey();
+                       break;
+                   case 6:
+                       isTrue = false;
+                       break;
+                   default:
+                       InvalidInput();
+                       break;
+               }
+           } while (isTrue);
+       }
 
-    private static void DepartementMenu()
-    {
-        Departement departement = new Departement();
-        VDepartement vDepartement = new VDepartement();
-        CDepartement cDepartement = new CDepartement(departement, vDepartement);
+       private static void DepartementMenu()
+       {
+           Departement departement = new Departement();
+           VDepartement vDepartement = new VDepartement();
+           CDepartement cDepartement = new CDepartement(departement, vDepartement);
 
-        bool isTrue = true;
-        do
-        {
-            int pilihMenu = vDepartement.Menu();
-            switch (pilihMenu)
-            {
-                case 1:
-                    Console.Clear();
-                    cDepartement.Insert();
-                    PressAnyKey();
-                    break;
-                case 2:
-                    Console.Clear();
-                    cDepartement.Update();
-                    PressAnyKey();
-                    break;
-                case 3:
-                    Console.Clear();
-                    cDepartement.Delete();
-                    PressAnyKey();
-                    break;
-                case 4:
-                    cDepartement.GetById();
-                    PressAnyKey();
-                    break;
-                case 5:
-                    cDepartement.GetAll();
-                    PressAnyKey();
-                    break;
-                case 6:
-                    isTrue = false;
-                    break;
-                default:
-                    InvalidInput();
-                    break;
-            }
-        } while (isTrue);
-    }
-
-    private static void JobMenu()
-    {
-        Job job = new Job();
-        VJob vJob = new VJob();
-        CJob cJob = new CJob(job, vJob);
-
-        bool isTrue = true;
-        do
-        {
-            int pilihMenu = vJob.Menu();
-            switch (pilihMenu)
-            {
-                case 1:
-                    Console.Clear();
-                    cJob.Insert();
-                    PressAnyKey();
-                    break;
-                case 2:
-                    Console.Clear();
-                    cJob.Update();
-                    PressAnyKey();
-                    break;
-                case 3:
-                    Console.Clear();
-                    cJob.Delete();
-                    PressAnyKey();
-                    break;
-                case 4:
-                    cJob.GetById();
-                    PressAnyKey();
-                    break;
-                case 5:
-                    cJob.GetAll();
-                    PressAnyKey();
-                    break;
-                case 6:
-                    isTrue = false;
-                    break;
-                default:
-                    InvalidInput();
-                    break;
-            }
-        } while (isTrue);
-    }
-
-    private static void HistoryMenu()
-    {
-        History history = new History();
-        VHistory vHistory = new VHistory();
-        CHistory cHistory = new CHistory(history, vHistory);
-
-        bool isTrue = true;
-        do
-        {
-            int pilihMenu = vHistory.Menu();
-            switch (pilihMenu)
-            {
-                case 1:
-                    Console.Clear();
-                    cHistory.Insert();
-                    PressAnyKey();
-                    break;
-                case 2:
-                    Console.Clear();
-                    cHistory.Update();
-                    PressAnyKey();
-                    break;
-                case 3:
-                    Console.Clear();
-                    cHistory.Delete();
-                    PressAnyKey();
-                    break;
-                case 4:
-                    cHistory.GetById();
-                    PressAnyKey();
-                    break;
-                case 5:
-                    cHistory.GetAll();
-                    PressAnyKey();
-                    break;
-                case 6:
-                    isTrue = false;
-                    break;
-                default:
-                    InvalidInput();
-                    break;
-            }
-        } while (isTrue);
-    }
-
-    private static void EmployeeMenu()
-    {
-        Employee employee = new Employee();
-        VEmployee vEmployee = new VEmployee();
-        CEmployee cEmployee = new CEmployee(employee, vEmployee);
-
-        bool isTrue = true;
-        do
-        {
-            int pilihMenu = vEmployee.Menu();
-            switch (pilihMenu)
-            {
-                case 1:
-                    Console.Clear();
-                    cEmployee.Insert();
-                    PressAnyKey();
-                    break;
-                case 2:
-                    Console.Clear();
-                    cEmployee.Update();
-                    PressAnyKey();
-                    break;
-                case 3:
-                    Console.Clear();
-                    cEmployee.Delete();
-                    PressAnyKey();
-                    break;
-                case 4:
-                    cEmployee.GetById();
-                    PressAnyKey();
-                    break;
-                case 5:
-                    cEmployee.GetAll();
-                    PressAnyKey();
-                    break;
-                case 6:
-                    isTrue = false;
-                    break;
-                default:
-                    InvalidInput();
-                    break;
-            }
-        } while (isTrue);
-    }
+           bool isTrue = true;
+           do
+           {
+               int pilihMenu = vDepartement.Menu();
+               switch (pilihMenu)
+               {
+                   case 1:
+                       Console.Clear();
+                       cDepartement.Insert();
+                       PressAnyKey();
+                       break;
+                   case 2:
+                       Console.Clear();
+                       cDepartement.Update();
+                       PressAnyKey();
+                       break;
+                   case 3:
+                       Console.Clear();
+                       cDepartement.Delete();
+                       PressAnyKey();
+                       break;
+                   case 4:
+                       cDepartement.GetById();
+                       PressAnyKey();
+                       break;
+                   case 5:
+                       cDepartement.GetAll();
+                       PressAnyKey();
+                       break;
+                   case 6:
+                       isTrue = false;
+                       break;
+                   default:
+                       InvalidInput();
+                       break;
+               }
+           } while (isTrue);
+       }
 */
+       private static void JobMenu()
+       {
+           Job job = new Job();
+           VJob vJob = new VJob();
+           CJob cJob = new CJob(job, vJob);
+
+           bool isTrue = true;
+           do
+           {
+               int pilihMenu = vJob.Menu();
+               switch (pilihMenu)
+               {
+                   case 1:
+                       Console.Clear();
+                       cJob.Insert();
+                       PressAnyKey();
+                       break;
+                   case 2:
+                       Console.Clear();
+                       cJob.Update();
+                       PressAnyKey();
+                       break;
+                   case 3:
+                       Console.Clear();
+                       cJob.Delete();
+                       PressAnyKey();
+                       break;
+                   case 4:
+                       cJob.GetById();
+                       PressAnyKey();
+                       break;
+                   case 5:
+                       cJob.GetAll();
+                       PressAnyKey();
+                       break;
+                   case 6:
+                       isTrue = false;
+                       break;
+                   default:
+                       InvalidInput();
+                       break;
+               }
+           } while (isTrue);
+       }
+
+ /*      private static void HistoryMenu()
+       {
+           History history = new History();
+           VHistory vHistory = new VHistory();
+           CHistory cHistory = new CHistory(history, vHistory);
+
+           bool isTrue = true;
+           do
+           {
+               int pilihMenu = vHistory.Menu();
+               switch (pilihMenu)
+               {
+                   case 1:
+                       Console.Clear();
+                       cHistory.Insert();
+                       PressAnyKey();
+                       break;
+                   case 2:
+                       Console.Clear();
+                       cHistory.Update();
+                       PressAnyKey();
+                       break;
+                   case 3:
+                       Console.Clear();
+                       cHistory.Delete();
+                       PressAnyKey();
+                       break;
+                   case 4:
+                       cHistory.GetById();
+                       PressAnyKey();
+                       break;
+                   case 5:
+                       cHistory.GetAll();
+                       PressAnyKey();
+                       break;
+                   case 6:
+                       isTrue = false;
+                       break;
+                   default:
+                       InvalidInput();
+                       break;
+               }
+           } while (isTrue);
+       }
+
+       private static void EmployeeMenu()
+       {
+           Employee employee = new Employee();
+           VEmployee vEmployee = new VEmployee();
+           CEmployee cEmployee = new CEmployee(employee, vEmployee);
+
+           bool isTrue = true;
+           do
+           {
+               int pilihMenu = vEmployee.Menu();
+               switch (pilihMenu)
+               {
+                   case 1:
+                       Console.Clear();
+                       cEmployee.Insert();
+                       PressAnyKey();
+                       break;
+                   case 2:
+                       Console.Clear();
+                       cEmployee.Update();
+                       PressAnyKey();
+                       break;
+                   case 3:
+                       Console.Clear();
+                       cEmployee.Delete();
+                       PressAnyKey();
+                       break;
+                   case 4:
+                       cEmployee.GetById();
+                       PressAnyKey();
+                       break;
+                   case 5:
+                       cEmployee.GetAll();
+                       PressAnyKey();
+                       break;
+                   case 6:
+                       isTrue = false;
+                       break;
+                   default:
+                       InvalidInput();
+                       break;
+               }
+           } while (isTrue);
+       }
+   */
     private static void InvalidInput()
     {
         Console.WriteLine("Your input is not valid!");

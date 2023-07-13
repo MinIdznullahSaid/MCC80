@@ -64,4 +64,38 @@ public class CRegion
                 break;
         }
     }
+
+    public void Delete()
+    {
+        var region = _regionView.DeleteMenu();
+        var result = _regionModel.Delete(region.Id);
+
+        switch (result)
+        {
+            case -1:
+                _regionView.Error();
+                break;
+            case 0:
+                _regionView.Failure();
+                break;
+            default:
+                _regionView.Success();
+                break;
+        }
+    }
+
+    public void GetById()
+    {
+        var region = _regionView.GetByIdMenu(null);
+        var result = _regionModel.GetById(region.Id);
+
+        if (false)
+        {
+            _regionView.DataEmpty();
+        }
+        else
+        {
+            _regionView.GetById(result);
+        }
+    }
 }

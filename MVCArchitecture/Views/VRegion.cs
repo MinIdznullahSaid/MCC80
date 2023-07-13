@@ -1,4 +1,5 @@
-﻿using MVCArchitecture.Models;
+﻿using MVCArchitecture.Controllers;
+using MVCArchitecture.Models;
 
 namespace MVCArchitecture.Views;
 
@@ -31,7 +32,7 @@ public class VRegion
 
     public void Failure()
     {
-        Console.WriteLine("Fail, Id not found!");
+        Console.WriteLine("Failed, Id not found!");
     }
 
     public void Error()
@@ -42,9 +43,9 @@ public class VRegion
     public int Menu()
     {
         Console.WriteLine("== Menu Region ==");
-        Console.WriteLine("1. Tambah");
+        Console.WriteLine("1. Insert");
         Console.WriteLine("2. Update");
-        Console.WriteLine("3. Hapus");
+        Console.WriteLine("3. Delete");
         Console.WriteLine("4. Get By Id");
         Console.WriteLine("5. Get All");
         Console.WriteLine("6. Back");
@@ -56,7 +57,7 @@ public class VRegion
 
     public Region InsertMenu()
     {
-        Console.WriteLine("Masukan nama region yang ingin ditambahkan: ");
+        Console.WriteLine("Masukkan nama region yang ingin ditambahkan: ");
         string? inputName = Console.ReadLine();
 
         return new Region
@@ -68,7 +69,7 @@ public class VRegion
 
     public Region UpdateMenu()
     {
-        Console.WriteLine("Id region yang ingin diupdate: ");
+        Console.WriteLine("Masukkan Id region yang ingin diupdate: ");
         int id = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine("Masukkan update nama region: ");
         string name = Console.ReadLine();
@@ -78,5 +79,29 @@ public class VRegion
             Id = id,
             Name = name
         };
+    }
+
+    public Region DeleteMenu()
+    {
+        Console.WriteLine("Masukkan Id region yang ingin dihapus: ");
+        int id = Convert.ToInt32(Console.ReadLine());
+
+        return new Region
+        {
+            Id = id,
+        };
+    }
+
+    public Region GetByIdMenu(Region region)
+    {
+        Console.WriteLine("Masukkan Id region yang ingin ditampilkan: ");
+        int id = Convert.ToInt32(Console.ReadLine());
+
+        return new Region
+        {
+            Id = id,
+
+        };
+
     }
 }
