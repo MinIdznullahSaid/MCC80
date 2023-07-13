@@ -32,7 +32,7 @@ public class Histories
             {
                 case "1":
                     Console.Clear();
-                    Console.WriteLine("Masukkan tanggal masuk karyawan yang ingin ditambahkan:");
+                    Console.WriteLine("Masukkan tanggal masuk karyawan yang ingin ditambahkan (yyyy-mm-dd):");
                     string startdate = Console.ReadLine();
                     Console.WriteLine("Employee Id:");
                     int employeeid = Convert.ToInt32(Console.ReadLine());
@@ -46,23 +46,25 @@ public class Histories
                     break;
                 case "2":
                     Console.Clear();
-                    Console.WriteLine("Masukkan update tanggal masuk karyawan (yyyy-mm-dd56):");
+                    Console.WriteLine("Masukkan update tanggal masuk karyawan (yyyy-mm-dd):");
                     string startdateUpdate = Console.ReadLine();
                     Console.WriteLine("Employee Id:");
                     int employeeidUpdate = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("tanggal berakhirnya kontrak:");
+                    Console.WriteLine("Masukkan Update tanggal berakhirnya kontrak:");
                     string enddateUpdate = Console.ReadLine();
-                    Console.WriteLine("Departement Id:");
+                    Console.WriteLine("Masukkan Update Departement Id:");
                     int departementidUpdate = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Job Id:");
+                    Console.WriteLine("Masukkan Update Job Id:");
                     string jobidUpdate = Console.ReadLine();
                     UpdateHistories(startdateUpdate, employeeidUpdate, enddateUpdate, departementidUpdate, jobidUpdate);
                     break;
                 case "3":
                     Console.Clear();
+                    Console.WriteLine("Masukkan tanggal masuk karyawan (yyyy-mm-dd):");
+                    string startdateDelete = Console.ReadLine();
                     Console.WriteLine("Masukkan Employee Id Data History yang ingin dihapus:");
                     int employeeidDelete = Convert.ToInt32(Console.ReadLine());
-                    DeleteHistories(employeeidDelete);
+                    DeleteHistories(startdateDelete, employeeidDelete);
                     break;
                 case "4":
                     Console.WriteLine("Masukkan Employee Id Data History yang ingin ditampilkan:");
@@ -197,7 +199,7 @@ public class Histories
 
         SqlCommand sqlCommand = new SqlCommand();
         sqlCommand.Connection = _connection;
-        sqlCommand.CommandText = "UPDATE tbl_histories SET start_date = (@startdateUpdate), end_date = (@enddateUpdate), departement_id = (@departementidUpdate), job_id = (@jobidUpdate) WHERE employee_id = (@employeeidUpdate)";
+        sqlCommand.CommandText = "UPDATE tbl_histories SET end_date = (@enddateUpdate), departement_id = (@departementidUpdate), job_id = (@jobidUpdate) WHERE start_date = (@startdateUpdate) AND employee_id = (@employeeidUpdate)";
 
         _connection.Open();
         SqlTransaction transaction = _connection.BeginTransaction();
@@ -224,7 +226,7 @@ public class Histories
             sqlCommand.Parameters.Add(pEndDateUpdate);
 
             SqlParameter pDepartementIdUpdate = new SqlParameter();
-            pDepartementIdUpdate.ParameterName = "@departementUpdate";
+            pDepartementIdUpdate.ParameterName = "@departementidUpdate";
             pDepartementIdUpdate.SqlDbType = SqlDbType.Int;
             pDepartementIdUpdate.Value = departementidUpdate;
             sqlCommand.Parameters.Add(pDepartementIdUpdate);
@@ -256,13 +258,13 @@ public class Histories
     }
 
     // DELETE HISTORY
-    public static void DeleteHistories(int employeeidDelete)
+    public static void DeleteHistories(string startdateDelete, int employeeidDelete)
     {
         _connection = new SqlConnection(_connectionString);
 
         SqlCommand sqlCommand = new SqlCommand();
         sqlCommand.Connection = _connection;
-        sqlCommand.CommandText = "DELETE FROM tbl_histories WHERE employee_id = (@employeeidDelete)";
+        sqlCommand.CommandText = "DELETE FROM tbl_histories WHERE start_date = (@startdateDelete) AND employee_id = (@employeeidDelete)";
 
         _connection.Open();
         SqlTransaction transaction = _connection.BeginTransaction();
@@ -275,6 +277,12 @@ public class Histories
             pEmployeeIdDelete.SqlDbType = SqlDbType.Int;
             pEmployeeIdDelete.Value = employeeidDelete;
             sqlCommand.Parameters.Add(pEmployeeIdDelete);
+
+            SqlParameter pStartDateDelete = new SqlParameter();
+            pStartDateDelete.ParameterName = "@startdateDelete";
+            pStartDateDelete.SqlDbType = SqlDbType.DateTime;
+            pStartDateDelete.Value = startdateDelete;
+            sqlCommand.Parameters.Add(pStartDateDelete);
 
             int result = sqlCommand.ExecuteNonQuery();
             if (result > 0)

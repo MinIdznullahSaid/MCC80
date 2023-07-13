@@ -29,7 +29,8 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    //Create();
+                    Console.Clear();
+                    Employees.Execute();
                     break;
                 case "2":
                     Console.Clear();
