@@ -217,11 +217,11 @@ public class Job
             reader.Close();
             connection.Close();
 
-            return new Job();
+            return job;
         }
         catch
         {
-            return new Job();
+            return null;
         }
     }
 }

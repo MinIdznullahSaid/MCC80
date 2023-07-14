@@ -202,11 +202,11 @@ public class Country
             reader.Close();
             connection.Close();
 
-            return new Country();
+            return country;
         }
         catch
         {
-            return new Country();
+            return null;
         }
     }
 }
