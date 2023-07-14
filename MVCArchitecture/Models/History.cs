@@ -8,9 +8,9 @@ namespace MVCArchitecture.Models;
 
 public class History
 {
-    public string StartDate { get; set; }
+    public DateTime StartDate { get; set; }
     public int EmployeeId { get; set; }
-    public string EndDate { get; set; }
+    public DateTime EndDate { get; set; }
     public int DepartementId { get; set; }
     public int JobId { get; set; }
 
@@ -34,9 +34,9 @@ public class History
                 while (reader.Read())
                 {
                     History history = new History();
-                    history.StartDate = reader.GetString(0);
+                    history.StartDate = reader.GetDateTime(0);
                     history.EmployeeId = reader.GetInt32(1);
-                    history.EndDate = reader.GetString(2);
+                    history.EndDate = reader.GetDateTime(2);
                     history.DepartementId = reader.GetInt32(3);
                     history.JobId = reader.GetInt32(4);
 
@@ -225,9 +225,9 @@ public class History
             {
                 reader.Read();
 
-                history.StartDate = reader.GetString(0);
+                history.StartDate = reader.GetDateTime(0);
                 history.EmployeeId = reader.GetInt32(1);
-                history.EndDate = reader.GetString(2);
+                history.EndDate = reader.GetDateTime(2);
                 history.DepartementId = reader.GetInt32(3);
                 history.JobId = reader.GetInt32(4);
             }

@@ -1,7 +1,9 @@
 ﻿using MVCArchitecture;
 using MVCArchitecture.Controllers;
 using MVCArchitecture.Views;
+using System.Data;
 using System.Data.SqlClient;
+using System.Numerics;
 
 namespace MVCArchitecture.Models;
 
@@ -68,13 +70,13 @@ public class Employee
         }
     }
 
-    /*   public int Insert(Departement departement)
+       public int Insert(Employee employee)
        {
            var connection = Connection.Get();
 
            using SqlCommand sqlCommand = new SqlCommand();
            sqlCommand.Connection = connection;
-           sqlCommand.CommandText = "INSERT INTO tbl_departements VALUES (@id, @name, @locationid, @managerid)";
+           sqlCommand.CommandText = "INSERT INTO tbl_employees VALUES (@id, @firstname, @lastname, @email, @phone, @hiredate, @salary, @comission, @managerid, @jobid, @departementid)";
 
            connection.Open();
            using SqlTransaction transaction = connection.BeginTransaction();
@@ -82,31 +84,74 @@ public class Employee
 
            try
            {
-               SqlParameter pId = new SqlParameter();
-               pId.ParameterName = "@id";
-               pId.SqlDbType = System.Data.SqlDbType.Int;
-               pId.Value = departement.Id;
-               sqlCommand.Parameters.Add(pId);
 
-               SqlParameter pName = new SqlParameter();
-               pName.ParameterName = "@name";
-               pName.SqlDbType = System.Data.SqlDbType.VarChar;
-               pName.Value = departement.Name;
-               sqlCommand.Parameters.Add(pName);
+            SqlParameter pId = new SqlParameter();
+            pId.ParameterName = "@id";
+            pId.SqlDbType = System.Data.SqlDbType.Int;
+            pId.Value = employee.Id;
+            sqlCommand.Parameters.Add(pId);
 
-               SqlParameter pLocationId = new SqlParameter();
-               pLocationId.ParameterName = "@locationid";
-               pLocationId.SqlDbType = System.Data.SqlDbType.Int;
-               pLocationId.Value = departement.LocationId;
-               sqlCommand.Parameters.Add(pLocationId);
+            SqlParameter pFirstName = new SqlParameter();
+            pFirstName.ParameterName = "@firstname";
+            pFirstName.SqlDbType = System.Data.SqlDbType.VarChar;
+            pFirstName.Value = employee.FirstName;
+            sqlCommand.Parameters.Add(pFirstName);
 
-               SqlParameter pManagerId = new SqlParameter();
-               pManagerId.ParameterName = "@managerid";
-               pManagerId.SqlDbType = System.Data.SqlDbType.Int;
-               pManagerId.Value = departement.ManagerId;
-               sqlCommand.Parameters.Add(pManagerId);
+            SqlParameter pLastName = new SqlParameter();
+            pLastName.ParameterName = "@lastname";
+            pLastName.SqlDbType = System.Data.SqlDbType.VarChar;
+            pLastName.Value = employee.LastName;
+            sqlCommand.Parameters.Add(pLastName);
 
-               int result = sqlCommand.ExecuteNonQuery();
+            SqlParameter pEmail = new SqlParameter();
+            pEmail.ParameterName = "@email";
+            pEmail.SqlDbType = System.Data.SqlDbType.VarChar;
+            pEmail.Value = employee.Email;
+            sqlCommand.Parameters.Add(pEmail);
+
+            SqlParameter pPhoneNumber = new SqlParameter();
+            pPhoneNumber.ParameterName = "@phone";
+            pPhoneNumber.SqlDbType = System.Data.SqlDbType.VarChar;
+            pPhoneNumber.Value = employee.PhoneNumber;
+            sqlCommand.Parameters.Add(pPhoneNumber);
+
+            SqlParameter pHireDate = new SqlParameter();
+            pHireDate.ParameterName = "@hiredate";
+            pHireDate.SqlDbType = System.Data.SqlDbType.DateTime;
+            pHireDate.Value = employee.HireDate;
+            sqlCommand.Parameters.Add(pHireDate);
+
+            SqlParameter pSalary = new SqlParameter();
+            pSalary.ParameterName = "@salary";
+            pSalary.SqlDbType = System.Data.SqlDbType.Int;
+            pSalary.Value = employee.Salary;
+            sqlCommand.Parameters.Add(pSalary);
+
+            SqlParameter pComission = new SqlParameter();
+            pComission.ParameterName = "@comission";
+            pComission.SqlDbType = System.Data.SqlDbType.Decimal;
+            pComission.Value = employee.Comission;
+            sqlCommand.Parameters.Add(pComission);
+
+            SqlParameter pManagerId = new SqlParameter();
+            pManagerId.ParameterName = "@managerid";
+            pManagerId.SqlDbType = System.Data.SqlDbType.Int;
+            pManagerId.Value = employee.ManagerId;
+            sqlCommand.Parameters.Add(pManagerId);
+
+            SqlParameter pJobId = new SqlParameter();
+            pJobId.ParameterName = "@jobid";
+            pJobId.SqlDbType = System.Data.SqlDbType.Char;
+            pJobId.Value = employee.JobId;
+            sqlCommand.Parameters.Add(pJobId);
+
+            SqlParameter pDepartementId = new SqlParameter();
+            pDepartementId.ParameterName = "@departementid";
+            pDepartementId.SqlDbType = System.Data.SqlDbType.Int;
+            pDepartementId.Value = employee.DepartementId;
+            sqlCommand.Parameters.Add(pDepartementId);
+
+            int result = sqlCommand.ExecuteNonQuery();
 
                transaction.Commit();
                connection.Close();
@@ -120,55 +165,97 @@ public class Employee
            }
        }
 
-       public int Update(Departement departement)
+       public int Update(Employee employee)
        {
            var connection = Connection.Get();
 
            SqlCommand sqlCommand = new SqlCommand();
            sqlCommand.Connection = connection;
-           sqlCommand.CommandText = "INSERT INTO tbl_departements (id, name, location_id, manager_id) VALUES (@id, @name, @locationid, @managerid)";
+           sqlCommand.CommandText = "UPDATE tbl_employees SET first_name = (@fnameUpdate), last_name = (@lnameUpdate), email = (@emailUpdate), phone_number = (@phoneUpdate), hire_date = (@hireUpdate), salary = (@salUpdate), comission_pct = (@comUpdate), manager_id = (@manidUpdate), job_id = (@jobidUpdate), departement_id = (@depidUpdate) WHERE id = (@idUpdate)";
 
            connection.Open();
            SqlTransaction transaction = connection.BeginTransaction();
            sqlCommand.Transaction = transaction;
            try
            {
-               SqlParameter pId = new SqlParameter();
-               pId.ParameterName = "@id";
-               pId.SqlDbType = System.Data.SqlDbType.Int;
-               pId.Value = departement.Id;
-               sqlCommand.Parameters.Add(pId);
+            SqlParameter pId = new SqlParameter();
+            pId.ParameterName = "@id";
+            pId.SqlDbType = System.Data.SqlDbType.Int;
+            pId.Value = employee.Id;
+            sqlCommand.Parameters.Add(pId);
 
-               SqlParameter pName = new SqlParameter();
-               pName.ParameterName = "@name";
-               pName.SqlDbType = System.Data.SqlDbType.VarChar;
-               pName.Value = departement.Name;
-               sqlCommand.Parameters.Add(pName);
+            SqlParameter pFirstName = new SqlParameter();
+            pFirstName.ParameterName = "@firstname";
+            pFirstName.SqlDbType = System.Data.SqlDbType.VarChar;
+            pFirstName.Value = employee.FirstName;
+            sqlCommand.Parameters.Add(pFirstName);
 
-               SqlParameter pLocationId = new SqlParameter();
-               pLocationId.ParameterName = "@locationid";
-               pLocationId.SqlDbType = System.Data.SqlDbType.Int;
-               pLocationId.Value = departement.LocationId;
-               sqlCommand.Parameters.Add(pLocationId);
+            SqlParameter pLastName = new SqlParameter();
+            pLastName.ParameterName = "@lastname";
+            pLastName.SqlDbType = System.Data.SqlDbType.VarChar;
+            pLastName.Value = employee.LastName;
+            sqlCommand.Parameters.Add(pLastName);
 
-               SqlParameter pManagerId = new SqlParameter();
-               pManagerId.ParameterName = "@managerid";
-               pManagerId.SqlDbType = System.Data.SqlDbType.Int;
-               pManagerId.Value = departement.ManagerId;
-               sqlCommand.Parameters.Add(pManagerId);
+            SqlParameter pEmail = new SqlParameter();
+            pEmail.ParameterName = "@email";
+            pEmail.SqlDbType = System.Data.SqlDbType.VarChar;
+            pEmail.Value = employee.Email;
+            sqlCommand.Parameters.Add(pEmail);
 
-               int result = sqlCommand.ExecuteNonQuery();
+            SqlParameter pPhoneNumber = new SqlParameter();
+            pPhoneNumber.ParameterName = "@phone";
+            pPhoneNumber.SqlDbType = System.Data.SqlDbType.VarChar;
+            pPhoneNumber.Value = employee.PhoneNumber;
+            sqlCommand.Parameters.Add(pPhoneNumber);
 
-               transaction.Commit();
-               connection.Close();
+            SqlParameter pHireDate = new SqlParameter();
+            pHireDate.ParameterName = "@hiredate";
+            pHireDate.SqlDbType = System.Data.SqlDbType.DateTime;
+            pHireDate.Value = employee.HireDate;
+            sqlCommand.Parameters.Add(pHireDate);
 
-               return result;
+            SqlParameter pSalary = new SqlParameter();
+            pSalary.ParameterName = "@salary";
+            pSalary.SqlDbType = System.Data.SqlDbType.Int;
+            pSalary.Value = employee.Salary;
+            sqlCommand.Parameters.Add(pSalary);
+
+            SqlParameter pComission = new SqlParameter();
+            pComission.ParameterName = "@comission";
+            pComission.SqlDbType = System.Data.SqlDbType.Decimal;
+            pComission.Value = employee.Comission;
+            sqlCommand.Parameters.Add(pComission);
+
+            SqlParameter pManagerId = new SqlParameter();
+            pManagerId.ParameterName = "@managerid";
+            pManagerId.SqlDbType = System.Data.SqlDbType.Int;
+            pManagerId.Value = employee.ManagerId;
+            sqlCommand.Parameters.Add(pManagerId);
+
+            SqlParameter pJobId = new SqlParameter();
+            pJobId.ParameterName = "@jobid";
+            pJobId.SqlDbType = System.Data.SqlDbType.Char;
+            pJobId.Value = employee.JobId;
+            sqlCommand.Parameters.Add(pJobId);
+
+            SqlParameter pDepartementId = new SqlParameter();
+            pDepartementId.ParameterName = "@departementid";
+            pDepartementId.SqlDbType = System.Data.SqlDbType.Int;
+            pDepartementId.Value = employee.DepartementId;
+            sqlCommand.Parameters.Add(pDepartementId);
+
+            int result = sqlCommand.ExecuteNonQuery();
+
+            transaction.Commit();
+            connection.Close();
+
+            return result;
 
            }
-           catch
+            catch
            {
-               transaction.Rollback();
-               return -1;
+                transaction.Rollback();
+                return -1;
            }
        }
 
@@ -203,7 +290,7 @@ public class Employee
                transaction.Rollback();
                return -1;
            }
-       }*/
+       }
 
     public Employee GetById(int id)
        {

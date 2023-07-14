@@ -60,11 +60,11 @@ public class VHistory
     public History InsertMenu()
     {
         Console.WriteLine("Masukkan start date yang ingin ditambahkan: ");
-        string startDate = Console.ReadLine();
+        DateTime startDate = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Masukkan employee id yang ingin ditambahkan: ");
         int employeeId = Int32.Parse(Console.ReadLine());
         Console.WriteLine("Location Id: ");
-        string endDate = Console.ReadLine();
+        DateTime endDate = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Departement Id: ");
         int departementId = Int32.Parse(Console.ReadLine());
         Console.WriteLine("Job Id: ");
@@ -84,11 +84,11 @@ public class VHistory
     public History UpdateMenu()
     {
         Console.WriteLine("Masukkan start date yang ingin diupdate: ");
-        string startDate = Console.ReadLine();
+        DateTime startDate = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Masukkan employee id yang ingin diupdate: ");
         int employeeId = Int32.Parse(Console.ReadLine());
         Console.WriteLine("End date: ");
-        string endDate = Console.ReadLine();
+        DateTime endDate = DateTime.Parse(Console.ReadLine());
         Console.WriteLine("Departement Id: ");
         int departementId = Int32.Parse(Console.ReadLine());
         Console.WriteLine("Job Id: ");

@@ -63,22 +63,22 @@ public class VEmployee
         Console.WriteLine("Error retrieving from database!");
     }
 
-  /*  public Departement InsertMenu()
+    public Employee InsertMenu()
     {
-        Console.WriteLine("Masukkan id departement yang ingin ditambahkan: ");
+        Console.WriteLine("Masukkan id employee yang ingin ditambahkan: ");
         int inputId = Int32.Parse(Console.ReadLine());
-        Console.WriteLine("Nama Departement: ");
+        Console.WriteLine("Nama Employee: ");
         string inputName = Console.ReadLine();
         Console.WriteLine("Location Id: ");
         int inputLocationId = Int32.Parse(Console.ReadLine());
         Console.WriteLine("Manager Id: ");
         int inputManagerId = Int32.Parse(Console.ReadLine());
 
-        return new Departement
+        return new Employee
         {
             Id = inputId,
-            Name = inputName,
-            LocationId = inputLocationId,
+            FirstName = inputName,
+            Last = inputLocationId,
             ManagerId = inputManagerId
         };
     }
@@ -126,5 +126,5 @@ public class VEmployee
 
         };
 
-    }*/
+    }
 }

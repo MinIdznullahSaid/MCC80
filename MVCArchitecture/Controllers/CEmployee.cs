@@ -28,75 +28,75 @@ public class CEmployee
         }
     }
 
-  /*  public void Insert()
+    public void Insert()
     {
-        var departement = _departementView.InsertMenu();
+        var employee = _employeeView.InsertMenu();
 
-        var result = _departementModel.Insert(departement);
+        var result = _employeeModel.Insert(employee);
         switch (result)
         {
             case -1:
-                _departementView.Error();
+                _employeeView.Error();
                 break;
             case 0:
-                _departementView.Failure();
+                _employeeView.Failure();
                 break;
             default:
-                _departementView.Success();
+                _employeeView.Success();
                 break;
         }
     }
 
     public void Update()
     {
-        var departement = _departementView.UpdateMenu();
-        var result = _departementModel.Update(departement);
+        var employee = _employeeView.UpdateMenu();
+        var result = _employeeModel.Update(employee);
 
         switch (result)
         {
             case -1:
-                _departementView.Error();
+                _employeeView.Error();
                 break;
             case 0:
-                _departementView.Failure();
+                _employeeView.Failure();
                 break;
             default:
-                _departementView.Success();
+                _employeeView.Success();
                 break;
         }
     }
 
     public void Delete()
     {
-        var departement = _departementView.DeleteMenu();
-        var result = _departementModel.Delete(departement.Id);
+        var employee = _employeeView.DeleteMenu();
+        var result = _employeeModel.Delete(employee.Id);
 
         switch (result)
         {
             case -1:
-                _departementView.Error();
+                _employeeView.Error();
                 break;
             case 0:
-                _departementView.Failure();
+                _employeeView.Failure();
                 break;
             default:
-                _departementView.Success();
+                _employeeView.Success();
                 break;
         }
     }
 
     public void GetById()
     {
-        var departement = _departementView.GetByIdMenu(null);
-        var result = _departementModel.GetById(departement.Id);
+        var employee = _employeeView.GetByIdMenu(null);
+        var result = _employeeModel.GetById(employee.Id);
 
         if (false)
         {
-            _departementView.DataEmpty();
+            _employeeView.DataEmpty();
         }
         else
         {
-            _departementView.GetById(result);
+            _employeeView.GetById(result);
         }
-    }*/
+    }
 }

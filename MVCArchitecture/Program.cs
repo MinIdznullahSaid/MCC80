@@ -377,7 +377,7 @@ public class Program
                    int pilihMenu = vEmployee.Menu();
                    switch (pilihMenu)
                    {
-  /*                     case 1:
+                       case 1:
                            Console.Clear();
                            cEmployee.Insert();
                            PressAnyKey();
@@ -396,7 +396,7 @@ public class Program
                            cEmployee.GetById();
                            PressAnyKey();
                            break;
- */                    case 5:
+                       case 5:
                            cEmployee.GetAll();
                            PressAnyKey();
                            break;
