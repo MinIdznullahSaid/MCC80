@@ -12,7 +12,7 @@ public class History
     public int EmployeeId { get; set; }
     public DateTime EndDate { get; set; }
     public int DepartementId { get; set; }
-    public int JobId { get; set; }
+    public string JobId { get; set; }
 
     public List<History> GetAll()
     {
@@ -38,7 +38,7 @@ public class History
                     history.EmployeeId = reader.GetInt32(1);
                     history.EndDate = reader.GetDateTime(2);
                     history.DepartementId = reader.GetInt32(3);
-                    history.JobId = reader.GetInt32(4);
+                    history.JobId = reader.GetString(4);
 
                     histories.Add(history);
                 }
@@ -80,7 +80,7 @@ public class History
             SqlParameter pEmployeeId = new SqlParameter();
             pEmployeeId.ParameterName = "@employeeid";
             pEmployeeId.SqlDbType = System.Data.SqlDbType.Int;
-            pEmployeeId.Value = history.StartDate;
+            pEmployeeId.Value = history.EmployeeId;
             sqlCommand.Parameters.Add(pEmployeeId);
 
             SqlParameter pEndDate = new SqlParameter();
@@ -97,7 +97,7 @@ public class History
 
             SqlParameter pJobId = new SqlParameter();
             pJobId.ParameterName = "@jobid";
-            pJobId.SqlDbType = System.Data.SqlDbType.Int;
+            pJobId.SqlDbType = System.Data.SqlDbType.VarChar;
             pJobId.Value = history.JobId;
             sqlCommand.Parameters.Add(pJobId);
 
@@ -121,7 +121,7 @@ public class History
 
         SqlCommand sqlCommand = new SqlCommand();
         sqlCommand.Connection = connection;
-        sqlCommand.CommandText = "UPDATE tbl_histories SET end_date = (@enddateUpdate), departement_id = (@departementidUpdate), job_id = (@jobidUpdate) WHERE employee_id = (@employeeidUpdate)";
+        sqlCommand.CommandText = "UPDATE tbl_histories SET end_date = (@enddate), departement_id = (@departementid), job_id = (@jobid) WHERE employee_id = (@employeeid)";
 
         connection.Open();
         SqlTransaction transaction = connection.BeginTransaction();
@@ -137,7 +137,7 @@ public class History
             SqlParameter pEmployeeId = new SqlParameter();
             pEmployeeId.ParameterName = "@employeeid";
             pEmployeeId.SqlDbType = System.Data.SqlDbType.Int;
-            pEmployeeId.Value = history.StartDate;
+            pEmployeeId.Value = history.EmployeeId;
             sqlCommand.Parameters.Add(pEmployeeId);
 
             SqlParameter pEndDate = new SqlParameter();
@@ -154,7 +154,7 @@ public class History
 
             SqlParameter pJobId = new SqlParameter();
             pJobId.ParameterName = "@jobid";
-            pJobId.SqlDbType = System.Data.SqlDbType.Int;
+            pJobId.SqlDbType = System.Data.SqlDbType.VarChar;
             pJobId.Value = history.JobId;
             sqlCommand.Parameters.Add(pJobId);
 
@@ -206,7 +206,7 @@ public class History
         }
     }
 
-    public History GetById(int employeeid)
+    public History GetById(int employeeId)
     {
         var history = new History();
 
@@ -215,7 +215,7 @@ public class History
         SqlCommand sqlCommand = new SqlCommand();
         sqlCommand.Connection = connection;
         sqlCommand.CommandText = "SELECT * FROM tbl_histories WHERE employee_id = @employeeid";
-        sqlCommand.Parameters.AddWithValue("@employee_id", employeeid);
+        sqlCommand.Parameters.AddWithValue("@employeeid", employeeId);
 
         try
         {
@@ -229,7 +229,7 @@ public class History
                 history.EmployeeId = reader.GetInt32(1);
                 history.EndDate = reader.GetDateTime(2);
                 history.DepartementId = reader.GetInt32(3);
-                history.JobId = reader.GetInt32(4);
+                history.JobId = reader.GetString(4);
             }
 
             reader.Close();

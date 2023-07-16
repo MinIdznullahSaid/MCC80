@@ -1,5 +1,6 @@
 ﻿using MVCArchitecture.Controllers;
 using MVCArchitecture.Models;
+using System.Globalization;
 
 namespace MVCArchitecture.Views;
 
@@ -59,22 +60,46 @@ public class VHistory
 
     public History InsertMenu()
     {
-        Console.WriteLine("Masukkan start date yang ingin ditambahkan: ");
-        DateTime startDate = DateTime.Parse(Console.ReadLine());
+        Console.WriteLine("Masukkan start date yang ingin ditambahkan (yyyy-mm-dd): ");
+        string startDate = Console.ReadLine();
+
+        DateTime startdate;
+
+        if (DateTime.TryParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out startdate))
+        {
+            Console.WriteLine("Input date: " + startdate.ToString());
+        }
+        else
+        {
+            Console.WriteLine("Wrong date format");
+        }
+
         Console.WriteLine("Masukkan employee id yang ingin ditambahkan: ");
         int employeeId = Int32.Parse(Console.ReadLine());
-        Console.WriteLine("Location Id: ");
-        DateTime endDate = DateTime.Parse(Console.ReadLine());
+        Console.WriteLine("End date (yyyy-mm-dd): ");
+        string endDate = Console.ReadLine();
+
+        DateTime enddate;
+
+        if (DateTime.TryParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out enddate))
+        {
+            Console.WriteLine("Input date: " + enddate.ToString());
+        }
+        else
+        {
+            Console.WriteLine("Wrong date format");
+        }
+
         Console.WriteLine("Departement Id: ");
         int departementId = Int32.Parse(Console.ReadLine());
         Console.WriteLine("Job Id: ");
-        int jobId = Int32.Parse(Console.ReadLine());
+        string jobId = Console.ReadLine();
 
         return new History
         {
-            StartDate = startDate,
+            StartDate = startdate,
             EmployeeId = employeeId,
-            EndDate = endDate,
+            EndDate = enddate,
             DepartementId = departementId,
             JobId = jobId
 
@@ -92,7 +117,7 @@ public class VHistory
         Console.WriteLine("Departement Id: ");
         int departementId = Int32.Parse(Console.ReadLine());
         Console.WriteLine("Job Id: ");
-        int jobId = Int32.Parse(Console.ReadLine());
+        string jobId = Console.ReadLine();
 
 
         return new History

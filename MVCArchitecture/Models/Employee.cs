@@ -171,7 +171,7 @@ public class Employee
 
            SqlCommand sqlCommand = new SqlCommand();
            sqlCommand.Connection = connection;
-           sqlCommand.CommandText = "UPDATE tbl_employees SET first_name = (@fnameUpdate), last_name = (@lnameUpdate), email = (@emailUpdate), phone_number = (@phoneUpdate), hire_date = (@hireUpdate), salary = (@salUpdate), comission_pct = (@comUpdate), manager_id = (@manidUpdate), job_id = (@jobidUpdate), departement_id = (@depidUpdate) WHERE id = (@idUpdate)";
+           sqlCommand.CommandText = "UPDATE tbl_employees SET first_name = (@firstname), last_name = (@lastname), email = (@email), phone_number = (@phone), hire_date = (@hiredate), salary = (@salary), comission_pct = (@comission), manager_id = (@managerid), job_id = (@jobid), departement_id = (@departementid) WHERE id = (@id)";
 
            connection.Open();
            SqlTransaction transaction = connection.BeginTransaction();
@@ -265,7 +265,7 @@ public class Employee
 
            SqlCommand sqlCommand = new SqlCommand();
            sqlCommand.Connection = connection;
-           sqlCommand.CommandText = "DELETE FROM tbl_departements WHERE id = @id";
+           sqlCommand.CommandText = "DELETE FROM tbl_employees WHERE id = @id";
 
            connection.Open();
            SqlTransaction transaction = connection.BeginTransaction();

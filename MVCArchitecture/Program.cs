@@ -25,7 +25,7 @@ public class Program
             Console.WriteLine("4. Countries");
             Console.WriteLine("5. Regions");
             Console.WriteLine("6. Locations");
-            Console.WriteLine("7. Hitories");
+            Console.WriteLine("7. Histories");
             Console.WriteLine("8. LINQ");
             Console.WriteLine("9. Exit");
             Console.Write("Enter your choice (1-9): ");
